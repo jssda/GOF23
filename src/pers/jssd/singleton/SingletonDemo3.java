@@ -1,32 +1,24 @@
 package pers.jssd.singleton;
 
 /**
- * 双重检测机制， 工作不常用， 有时候会失灵
- * 
- * @ClassName SingletonDemo3
- * @author jssd
+ * 双重检测机制
  *
- * @date: 2019年3月19日 下午10:44:30
+ * @author jssd
+ * @version v2.0 2021-02-18 16:17:05
+ * @date 2019年3月19日 下午10:44:30
  */
 public class SingletonDemo3 {
 
-	private static SingletonDemo3 instance;
+	private static volatile SingletonDemo3 instance;
 
 	private SingletonDemo3() {
 	}
 
 	public static SingletonDemo3 getInstance() {
 		if (instance == null) {
-			SingletonDemo3 sc;
 			synchronized (SingletonDemo3.class) {
-				sc = instance;
-				if (sc == null) {
-					synchronized (SingletonDemo3.class) {
-						if (sc == null) {
-							sc = new SingletonDemo3();
-						}
-					}
-					instance = sc;
+				if (instance == null) {
+					instance = new SingletonDemo3();
 				}
 			}
 		}
